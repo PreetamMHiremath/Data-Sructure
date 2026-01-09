@@ -1,0 +1,278 @@
+
+
+Program 1: Resizable Interface with Rectangle
+Program
+// Resizable interface with two methods
+interface Resizable {
+    void resizeWidth(int width);
+    void resizeHeight(int height);
+}
+
+// Rectangle class implementing Resizable interface
+class Rectangle implements Resizable {
+    private int width;
+    private int height;
+
+    // Constructor
+    public Rectangle(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public void resizeWidth(int width) {
+        this.width = width;
+    }
+
+    @Override
+    public void resizeHeight(int height) {
+        this.height = height;
+    }
+
+    public void display() {
+        System.out.println("Width: " + width + ", Height: " + height);
+    }
+}
+
+public class ResizableDemo {
+    public static void main(String[] args) {
+        Rectangle rect = new Rectangle(50, 30);
+
+        System.out.println("Original Size:");
+        rect.display();
+
+        rect.resizeWidth(80);
+        rect.resizeHeight(60);
+
+        System.out.println("Resized Rectangle:");
+        rect.display();
+    }
+}
+
+
+I/O:
+Original Size:
+Width: 50, Height: 30
+Resized Rectangle:
+Width: 80, Height: 60
+
+Program 2: Inner Class Example
+Program
+class Outer {
+    
+    void display() {
+        System.out.println("Display method of Outer class");
+    }
+
+    class Inner {
+        void display() {
+            System.out.println("Display method of Inner class");
+        }
+    }
+}
+
+public class InnerClassDemo {
+    public static void main(String[] args) {
+
+        Outer outerObj = new Outer();
+        outerObj.display();
+
+        Outer.Inner innerObj = outerObj.new Inner();
+        innerObj.display();
+    }
+}
+I/O:
+No user input
+Display method of Outer class
+Display method of Inner class
+
+
+Program 3: Custom Exception – Division by Zero
+Program
+class DivisionByZeroException extends Exception {
+    public DivisionByZeroException(String message) {
+        super(message);
+    }
+}
+
+public class DivisionDemo {
+
+    static void divide(int a, int b) throws DivisionByZeroException {
+        if (b == 0) {
+            throw new DivisionByZeroException("Division by zero is not allowed");
+        }
+        System.out.println("Result: " + (a / b));
+    }
+
+    public static void main(String[] args) {
+
+        try {
+            int x = 10;
+            int y = 0;
+            divide(x, y);
+        }
+        catch (DivisionByZeroException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+        finally {
+            System.out.println("Finally block executed");
+        }
+    }
+}
+
+I/O:
+x = 10
+y = 0
+
+Exception caught: Division by zero is not allowed
+Finally block executed
+
+Program 4: Multithreading using Runnable Interface
+Program
+class MyThread implements Runnable {
+
+    public void run() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println(Thread.currentThread().getName() + " : " + i);
+                Thread.sleep(500);
+            }
+        }
+        catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+}
+
+public class RunnableDemo {
+    public static void main(String[] args) {
+
+        MyThread obj = new MyThread();
+
+        Thread t1 = new Thread(obj);
+        Thread t2 = new Thread(obj);
+
+        t1.start();
+        t2.start();
+    }
+}
+I/O:
+No user input
+
+Thread-0 : 1
+Thread-1 : 1
+Thread-0 : 2
+Thread-1 : 2
+Thread-0 : 3
+Thread-1 : 3
+Thread-0 : 4
+Thread-1 : 4
+Thread-0 : 5
+Thread-1 : 5
+
+Program 5: Multithreading using Thread Class
+Program
+class MyThread extends Thread {
+
+    MyThread(String name) {
+        super(name);
+        start();
+    }
+
+    public void run() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println(getName() + " running : " + i);
+                Thread.sleep(500);
+            }
+        }
+        catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+}
+
+public class ThreadDemo {
+    public static void main(String[] args) {
+
+        MyThread t = new MyThread("Child Thread");
+
+        try {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Main Thread running : " + i);
+                Thread.sleep(500);
+            }
+        }
+        catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+}
+
+I/O:
+No user input
+
+Child Thread running : 1
+Main Thread running : 1
+Child Thread running : 2
+Main Thread running : 2
+Child Thread running : 3
+Main Thread running : 3
+Child Thread running : 4
+Main Thread running : 4
+Child Thread running : 5
+Main Thread running : 5
+
+
+
+
+
+
+
+
+
+
+
+📁 Folder Structure
+mypack/
+   Shapes.java
+   Rectangle.java
+MainShape.java
+
+🔹 1. Shapes.java
+package mypack;
+
+public interface Shapes {
+    void area(int l, int b);
+}
+
+
+✔ Interfaces contain only abstract methods
+✔ No constructor inside interface
+
+🔹 2. Rectangle.java
+package mypack;
+
+public class Rectangle implements Shapes {
+
+    public void area(int l, int b) {
+        int result = l * b;
+        System.out.println("Area of Rectangle = " + result);
+    }
+}
+
+
+✔ implements keyword used
+✔ Method signature must match interface
+
+🔹 3. MainShape.java
+import mypack.*;
+
+public class MainShape {
+
+    public static void main(String[] args) {
+
+        Rectangle r = new Rectangle();
+        r.area(5, 10);
+    }
+}
