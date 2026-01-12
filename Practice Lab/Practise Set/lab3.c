@@ -71,6 +71,10 @@ void palindrome(){
 }
 
 void display(){
+    if(top==-1){
+        printf("Stack is Empty.");
+        return;
+    }
     printf("The Stack elements are:\n");
     for(i=0;i<=top;i++){
         printf("%d\n",s[i]);
