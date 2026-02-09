@@ -67,7 +67,7 @@ void display(NODE head){
 }
 
 void polysum(){
-    NODE temp,cur,prev,head1,head2,cur1,cur2;
+    NODE prev,head1,head2,cur1,cur2;
     head1=(NODE)malloc(sizeof(struct poly));
     head2=(NODE)malloc(sizeof(struct poly));
     head1->link=head1;
