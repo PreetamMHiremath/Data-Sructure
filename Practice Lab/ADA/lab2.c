@@ -1,98 +1,69 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+void MergeSort(int[], int, int);
+void Merge(int[], int, int, int);
+void Print_Array(int[], int);
+int arr[150000], b[150000], n ;
 
-void mergeSort(int arr[], int l, int r);
-void merge(int arr[], int l, int m, int r);
-void print_array(int arr[], int n);
-
-int n, arr[15000], b[15000];
-
-void main()
+int main()
 {
-    int i;
-    clock_t start, end;
-    double time_taken;
-
-    printf("Enter the size of the array:\n");
-    scanf("%d", &n);
-
-    printf("Enter the elements:\n");
-    for(i = 0; i < n; i++)
-    {
-        scanf("%d", &arr[i]);
-    }
-
-    printf("The unsorted array is:\n");
-    print_array(arr, n);
-
-    start = clock();
-
-    mergeSort(arr, 0, n - 1);
-
-    end = clock();
-
-    printf("The sorted array is:\n");
-    print_array(arr, n);
-
-    time_taken = (double)(end - start) / CLOCKS_PER_SEC;
-
-    printf("The total time taken to sort the array using Merge Sort: %f seconds\n", time_taken);
+int i;
+clock_t start, end;
+double time_taken;
+printf("enter the size of the array \n");
+scanf("%d", &n);
+for(i=0; i<n; i++) {
+arr[i] = rand() % n + 1;
+}
+printf("The Unsorted Array is:\n");
+Print_Array(arr, n);
+start = clock();
+MergeSort(arr, 0, n-1);
+end = clock();
+printf("The Sorted Array is:\n");
+Print_Array(arr, n);
+time_taken = ((double) (end - start)) / CLOCKS_PER_SEC;
+printf("time taken to sort %d numbers using Merge sort = %f\n", n,
+time_taken );
+}
+void Print_Array(int a[], int n)
+{
+int i;
+for(i = 0; i < n; i++)
+printf("%d\t", a[i]);
+printf("\n\n");
 }
 
-void print_array(int arr[], int n)
+void MergeSort(int a[], int low, int high)
 {
-    int i;
-
-    for(i = 0; i < n; i++)
-    {
-        printf("%d\t", arr[i]);
-    }
-
-    printf("\n");
+int mid;
+if (low < high)
+{
+mid = (int) ((low + high) / 2);
+MergeSort(a, low, mid);
+MergeSort(a, mid+1, high);
+Merge(a, low, mid, high);
 }
-
-void mergeSort(int arr[], int low, int high)
-{
-    int mid;
-
-    if(low < high)
-    {
-        mid = (low + high) / 2;
-
-        mergeSort(arr, low, mid);
-        mergeSort(arr, mid + 1, high);
-
-        merge(arr, low, mid, high);
-    }
 }
-
-void merge(int arr[], int l, int m, int r)
+void Merge(int a[], int l, int m, int r)
 {
-    int i = l;
-    int j = m + 1;
-    int k = l;
+int i, j, k;
+i = l;
+j = m + 1;
+k = l;
+while (i<=m && j<=r)
+{
+if(a[i] <= a[j])
+b[k++] = a[i++];
+else
+b[k++] = a[j++];
+}
+while(i <=m)
+b[k++] = a[i++];
+while(j<=r)
+b[k++] = a[j++];
 
-    while(i <= m && j <= r)
-    {
-        if(arr[i] <= arr[j])
-            b[k++] = arr[i++];
-        else
-            b[k++] = arr[j++];
-    }
-
-    while(i <= m)
-    {
-        b[k++] = arr[i++];
-    }
-
-    while(j <= r)
-    {
-        b[k++] = arr[j++];
-    }
-
-    for(i = l; i <= r; i++)
-    {
-        arr[i] = b[i];
-    }
+for(i = l; i<k; i++)
+a[i] = b[i];
 }

@@ -1,106 +1,69 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-
-void QuickSort(int [], int, int);
-int partition(int [], int, int);
-void print_array(int [], int);
-void swap(int *, int *);
-
-void main()
+void QuickSort(int[], int, int );
+void Print_Array(int[], int );
+int Partition(int[], int, int);
+void Swap (int*, int*);
+int main()
 {
-    int i, n, arr[15000];
-    clock_t start, end;
-    double time_taken;
-
-    printf("Enter the size of the array:\n");
-    scanf("%d", &n);
-
-    printf("Generating random elements:\n");
-
-    for(i = 0; i < n; i++)
-    {
-        arr[i] = rand() % n + 1;
-    }
-
-    printf("The unsorted array is:\n");
-    print_array(arr, n);
-
-    start = clock();
-
-    QuickSort(arr, 0, n - 1);
-
-    end = clock();
-
-    printf("The sorted array is:\n");
-    print_array(arr, n);
-
-    time_taken = (double)(end - start) / CLOCKS_PER_SEC;
-
-    printf("The total time taken to sort the array using Quick Sort: %f seconds\n", time_taken);
+int arr[150000], n, i;
+clock_t start, end;
+double time_taken;
+printf("enter the size of the array \n");
+scanf("%d", &n);
+for(i=0; i<n; i++) {
+arr[i] = rand() % n + 1;
 }
-
-void print_array(int arr[], int n)
-{
-    int i;
-
-    for(i = 0; i < n; i++)
-    {
-        printf("%d\t", arr[i]);
-    }
-
-    printf("\n");
+printf("The Unsorted Array is:\n");
+Print_Array(arr, n);
+start = clock();
+QuickSort(arr, 0, n-1);
+end = clock();
+printf("The Sorted Array is:\n");
+Print_Array(arr, n);
+time_taken = ((double) (end - start)) / CLOCKS_PER_SEC;
+printf("time taken to sort using Quick sort = %f\n", time_taken );
 }
+void Print_Array(int a[], int n)
 
-void QuickSort(int arr[], int l, int r)
 {
-    int s;
-
-    if(l < r)
-    {
-        s = partition(arr, l, r);
-
-        QuickSort(arr, l, s - 1);
-        QuickSort(arr, s + 1, r);
-    }
+int i;
+for( i = 0; i < n; i++)
+printf("%d\t", a[i]);
+printf("\n\n");
 }
-
-int partition(int arr[], int l, int r)
+void Swap(int *a, int *b)
 {
-    int i, j, pivot;
-
-    i = l;
-    j = r;
-    pivot = arr[l];
-
-    while(i < j)
-    {
-        while(i < r && arr[i] <= pivot)
-        {
-            i++;
-        }
-
-        while(j > l && arr[j] > pivot)
-        {
-            j--;
-        }
-
-        if(i < j)
-        {
-            swap(&arr[i], &arr[j]);
-        }
-    }
-
-    swap(&arr[l], &arr[j]);
-
-    return j;
+int temp = *a;
+*a = *b;
+*b =temp;
 }
-
-void swap(int *a, int *b)
+void QuickSort(int a[], int l, int r)
 {
-    int temp;
+int s;
+if (l<r)
+{
+s = Partition(a, l, r);
+QuickSort(a, l, s-1);
+QuickSort(a, s+1, r);
+}
+}
+int Partition(int a[], int l, int r)
+{
+int pivot, i, j;
+pivot = a[l];
+i = l;
+j = r ;
 
-    temp = *a;
-    *a = *b;
-    *b = temp;
+while(i < j){
+while( i < r && a[i] <= pivot)
+i++;
+while( j > l && a[j] > pivot)
+j--;
+if(i < j)
+Swap(&a[i], &a[j]);
+}
+Swap(&a[l], &a[j]);
+return j;
 }
