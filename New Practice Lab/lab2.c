@@ -14,7 +14,7 @@ void main(){
     if(cost[i][j]==0)
     cost[i][j]=999;
     }
-    printf("Enter the Starting matrix:\n");
+    printf("Enter the Starting vertex:\n");
     scanf("%d",&start);
     visited[start]=1;
     printf("The minimum cost spanning tree is :\n");
