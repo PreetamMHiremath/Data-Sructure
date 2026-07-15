@@ -1,5 +1,5 @@
 #include<stdio.h>
-int a[10][10],i,n,w,wt[20],val[20],max_profit;
+int i,n,w,wt[20],val[20],max_profit;
 int knapsack(int,int [],int [],int);
 void main(){
     printf("Enter the Number of vertices:\n");
