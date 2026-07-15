@@ -5,9 +5,9 @@ int find_parent(int x);
 
 void main(){
     int i,j,u,v,p,q,ne=1,min=999,total_cost=0;
-    printf("Enter the size of the adjacency matrix:\n");
+    printf("Enter the size of the cost matrix:\n");
     scanf("%d",&n);
-    printf("Enter the adjacency matrix:\n");
+    printf("Enter the cost matrix:\n");
     for(i=1;i<=n;i++)
     for(j=1;j<=n;j++){
     scanf("%d",&cost[i][j]);
